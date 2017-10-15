@@ -7,19 +7,17 @@ Created on Sun Oct 15 20:04:49 2017
 
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
-example_movie_list = ["antichrist", "festen"]
+#example_movie_list = ["antichrist", "festen"]
+#movie_db_url_base = "http://theapache64.xyz:8080/movie_db/search?keyword="
+#r = requests.get(movie_db_url_base+example_movie_list[1])
 
-url_1 = "http://lumiere.obs.coe.int"
-movie_db_url_base = "http://theapache64.xyz:8080/movie_db/search?keyword="
+payload = {'producing_country_id': 'DK', 'search':'Search'}
+url = "http://lumiere.obs.coe.int/web/search/index.php"
 
-r = requests.get(movie_db_url_base+example_movie_list[1])
+r = requests.post(url, data = payload)
 html_doc = r.text
-
 soup = BeautifulSoup(html_doc, "lxml")
-
 print(soup.prettify())
 
-for link in soup.findall('a'):
-    print(link.get("href"))
+
