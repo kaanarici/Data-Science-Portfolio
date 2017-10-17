@@ -26,6 +26,15 @@ movies = {"film_name": [], "producing_country":[],
 lang = "DA"
 
 # Populate the dictionary lists matching with the search language
-for name in soup.findAll('li'):
+for name in soup.findAll('a'):
     if lang in str(name):
         movies["film_name"].append(str(name)[4:-10])
+    if '(' not in str(name):
+        movies["directors"].append(str(name))
+
+# Trial for missing films
+names = []        
+for name in soup.findAll('a'):
+    if "film_info" in str(name):
+        names.append(name)
+names
